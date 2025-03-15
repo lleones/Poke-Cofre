@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/chai": "^5.2.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.4",
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.1",
+    "mocha": "^11.1.0",
+    "sinon": "^19.0.2",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.4.7",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
