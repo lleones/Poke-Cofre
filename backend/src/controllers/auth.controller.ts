@@ -59,7 +59,6 @@ export class AuthController {
           .json({ message: 'Nome ou senha inválidos.' });
       }
 
-      // Verifica a senha
       const isPasswordValid = await comparePassword(senha, treinador.senha);
       if (!isPasswordValid) {
         return res
@@ -67,7 +66,6 @@ export class AuthController {
           .json({ message: 'Nome ou senha inválidos.' });
       }
 
-      // Gera token
       const token = generateToken(treinador.id, treinador.nome);
 
       return res.status(200).json({

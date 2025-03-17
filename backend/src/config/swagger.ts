@@ -1,4 +1,3 @@
-// src/config/swagger.ts
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Express } from 'express';
@@ -28,29 +27,45 @@ const options = {
         Treinador: {
           type: 'object',
           properties: {
-            id: {
-              type: 'string',
-              example: '123e4567-e89b-12d3-a456-426614174000',
+            id: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174000' },
+            nome: { type: 'string', example: 'Bill' },
+          },
+        },
+        Pokemon: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174000' },
+            nickname: { type: 'string', example: 'Sparky' },
+            name: { type: 'string', example: 'Pikachu' },
+            trainerId: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174001' },
+          },
+        },
+        Party: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', example: 'party-uuid-1234' },
+            trainerId: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174001' },
+            pokemons: {
+              type: 'array',
+              items: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174000' },
             },
-            nome: {
-              type: 'string',
-              example: 'Bill',
-            },  
+          },
+        },
+        Batalha: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', example: 'battle-uuid-5678' },
+            winnerTrainerId: { type: 'string', example: '123e4567-e89bokemo-12d3-a456-426614174001' },
+            loserTrainerId: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174002' },
+            winnerPokemonId: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174003' },
+            loserPokemonId: { type: 'string', example: '123e4567-e89b-12d3-a456-426614174004' },
           },
         },
       },
     },
-    security: [
-      {
-        bearerAuth: [],
-      },
-    ],
+    security: [{ bearerAuth: [] }],
   },
-  apis: [
-    './src/routes/*.ts',
-    './src/models/*.ts',
-    './src/controllers/*.ts',
-  ],
+  apis: ['./src/routes/*.ts', './src/models/*.ts', './src/controllers/*.ts'],
 };
 
 const specs = swaggerJsdoc(options);

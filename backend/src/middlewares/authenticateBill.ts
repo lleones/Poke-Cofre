@@ -28,13 +28,11 @@ export const authenticateBill: RequestHandler = (req: Request, res: Response, ne
       return;
     }
     
-    // Verifica se o usuário é Bill
     if (decoded.nome !== 'Bill') {
       res.status(403).json({ message: 'Acesso negado. Apenas Bill pode acessar este endpoint.' });
       return;
     }
-    
-    // Armazena informações no objeto req para uso posterior
+
     (req as any).treinadorId = decoded.id;
     (req as any).treinadorNome = decoded.nome;
     next();
