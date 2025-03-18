@@ -1,4 +1,3 @@
-// src/routes/pokemon.routes.ts
 import { Router } from 'express';
 import { PokemonController } from '../controllers/pokemon.controller';
 import { authenticate } from '../middlewares/auth.middleware';
@@ -24,7 +23,7 @@ const router = Router();
  * @swagger
  * /pokemons:
  *   get:
- *     summary: Retorna todos os Pokémons
+ *     summary: Retorna todos os Pokémons com filtro opcional por tipo e paginação
  *     tags: [Pokémons]
  *     security:
  *       - bearerAuth: []
@@ -35,6 +34,24 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: type
+ *         description: "Filtra os Pokémons pelo tipo (ex: 'fire')"
+ *         required: false
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         description: "Número de itens por página"
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: page
+ *         description: "Número da página"
+ *         required: false
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Lista de Pokémons

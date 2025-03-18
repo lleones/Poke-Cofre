@@ -28,7 +28,7 @@ export const authenticateBill: RequestHandler = (req: Request, res: Response, ne
       return;
     }
     
-    if (decoded.nome !== 'Bill') {
+    if (decoded.nome !== 'bill') {
       res.status(403).json({ message: 'Acesso negado. Apenas Bill pode acessar este endpoint.' });
       return;
     }

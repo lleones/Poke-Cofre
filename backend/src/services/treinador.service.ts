@@ -3,7 +3,9 @@ import Treinador from '../models/treinador.model';
 
 interface TreinadorDTO {
   nome: string;
+  senha: string;
 }
+
 
 export class TreinadorService {
   static async createTreinador(treinadorData: TreinadorDTO): Promise<Treinador> {
