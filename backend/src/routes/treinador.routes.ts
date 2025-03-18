@@ -1,4 +1,3 @@
-// src/routes/treinador.routes.ts
 import { Router } from 'express';
 import { TreinadorController } from '../controllers/treinador.controller';
 import { authenticate } from '../middlewares/auth.middleware';
@@ -36,6 +35,18 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         description: "Número da página para paginação (padrão: 1)"
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         description: "Número de itens por página"
+ *         required: false
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Uma lista de treinadores
@@ -67,7 +78,7 @@ router.get('/', authenticateBill, TreinadorController.getAll);
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID do treinador (UUID)
+ *         description: "ID do treinador (UUID)"
  *         required: true
  *         schema:
  *           type: string
@@ -95,7 +106,7 @@ router.get('/', authenticateBill, TreinadorController.getAll);
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID do treinador (UUID)
+ *         description: "ID do treinador (UUID)"
  *         required: true
  *         schema:
  *           type: string
@@ -134,7 +145,7 @@ router.get('/', authenticateBill, TreinadorController.getAll);
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID do treinador (UUID)
+ *         description: "ID do treinador (UUID)"
  *         required: true
  *         schema:
  *           type: string

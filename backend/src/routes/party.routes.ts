@@ -1,4 +1,3 @@
-// src/routes/party.routes.ts
 import { Router } from 'express';
 import { PartyController } from '../controllers/party.controller';
 import { authenticate } from '../middlewares/auth.middleware';
@@ -63,7 +62,7 @@ const router = Router();
  *         description: Ação não autorizada.
  *
  *   get:
- *     summary: Retorna todas as parties (Apenas Bill pode acessar)
+ *     summary: Retorna todas as parties (Apenas Bill pode acessar) com paginação
  *     tags: [Parties]
  *     security:
  *       - bearerAuth: []
@@ -74,6 +73,18 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         description: "Número da página (padrão: 1)"
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         description: "Número de itens por página"
+ *         required: false
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Lista de parties
@@ -101,7 +112,7 @@ const router = Router();
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID da Party
+ *         description: "ID da Party"
  *         required: true
  *         schema:
  *           type: string
@@ -129,7 +140,7 @@ const router = Router();
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID da Party
+ *         description: "ID da Party"
  *         required: true
  *         schema:
  *           type: string
@@ -170,7 +181,7 @@ const router = Router();
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID da Party
+ *         description: "ID da Party"
  *         required: true
  *         schema:
  *           type: string

@@ -62,7 +62,7 @@ const router = Router();
  *               $ref: '#/components/schemas/Batalha'
  *
  *   get:
- *     summary: Retorna todas as batalhas
+ *     summary: Retorna todas as batalhas com paginação
  *     tags: [Batalhas]
  *     security:
  *       - bearerAuth: []
@@ -73,6 +73,18 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         description: "Número da página (padrão: 1)"
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         description: "Número de itens por página"
+ *         required: false
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Lista de batalhas
@@ -98,7 +110,7 @@ const router = Router();
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID da batalha
+ *         description: "ID da batalha"
  *         required: true
  *         schema:
  *           type: string
@@ -126,7 +138,7 @@ const router = Router();
  *           type: string
  *       - in: path
  *         name: id
- *         description: ID da batalha
+ *         description: "ID da batalha"
  *         required: true
  *         schema:
  *           type: string
