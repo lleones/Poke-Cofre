@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/27</span>
+                <span class='fraction'>3/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.84% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/26</span>
+                <span class='fraction'>2/26</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,37 +107,37 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -151,35 +151,35 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { verifyToken } from '../services/auth.service';
 &nbsp;
-export const authenticateBill: RequestHandler = (req: Request, res: Response, next: NextFunction) =&gt; {
-  try {
-    const header = req.headers.authorization;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!header) {
+export const authenticateBill: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq: Request, res: Response, next: NextFunction) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const header = <span class="cstat-no" title="statement not covered" >req.headers.authorization;</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!header) {</span>
 <span class="cstat-no" title="statement not covered" >      res.status(401).json({ message: 'Token não fornecido.' });</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
     
-    const parts = header.split(' ');
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (parts.length !== 2) {
+    const parts = <span class="cstat-no" title="statement not covered" >header.split(' ');</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (parts.length !== 2) {</span>
 <span class="cstat-no" title="statement not covered" >      res.status(401).json({ message: 'Token inválido.' });</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
     
-    const [scheme, token] = parts;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!/^Bearer$/i.test(scheme)) {
+    const [scheme, token] = <span class="cstat-no" title="statement not covered" >parts;</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!/^Bearer$/i.test(scheme)) {</span>
 <span class="cstat-no" title="statement not covered" >      res.status(401).json({ message: 'Formato de token inválido.' });</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
     
-    const decoded = verifyToken(token);
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof decoded === 'string' || !('nome' in decoded)) {
+    const decoded = <span class="cstat-no" title="statement not covered" >verifyToken(token);</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof decoded === 'string' || !('nome' in decoded)) {</span>
 <span class="cstat-no" title="statement not covered" >      res.status(401).json({ message: 'Token inválido ou payload inesperado.' });</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
     
-    if (decoded.nome !== 'bill') {
-      res.status(403).json({ message: 'Acesso negado. Apenas Bill pode acessar este endpoint.' });
-      return;
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (decoded.nome !== 'bill') {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(403).json({ message: 'Acesso negado. Apenas Bill pode acessar este endpoint.' });</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
     (<span class="cstat-no" title="statement not covered" >req as any).treinadorId = decoded.id;</span>
@@ -196,7 +196,7 @@ export const authenticateBill: RequestHandler = (req: Request, res: Response, ne
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-18T02:55:04.668Z
+                at 2025-03-18T02:57:01.374Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
