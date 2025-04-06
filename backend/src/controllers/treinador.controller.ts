@@ -1,10 +1,12 @@
+// src/controllers/treinador.controller.ts
 import { Request, Response } from 'express';
 import { TreinadorService } from '../services/treinador.service';
 
 export class TreinadorController {
   static async getAll(req: Request, res: Response): Promise<void> {
     try {
-      const treinadores = await TreinadorService.getAllTreinadores();
+      // Passa os query parameters para o service
+      const treinadores = await TreinadorService.getAllTreinadores(req.query as any);
       res.json(treinadores);
     } catch (error) {
       res.status(500).json({ error: 'Erro ao buscar treinadores' });
