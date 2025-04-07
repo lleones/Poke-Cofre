@@ -50,14 +50,14 @@ const Register = () => {
         borderRadius="md"
         margin="auto"
         maxW="500px"
-        border="1px solid rgba(0, 0, 0, 0.12)"
+        border="1px solid" borderColor="borderColor"
         align="left"
       >
         <Heading fontFamily="inherit" textTransform="uppercase" mb={1}>
           Registro de Treinador
         </Heading>
         <Input
-          border="1px solid rgba(0, 0, 0, 0.12)"
+          border="1px solid" borderColor="borderColor"
           bg="#F6F5FB"
           paddingX="16px"
           placeholder="username"
@@ -70,7 +70,7 @@ const Register = () => {
         )}
         <Input
           mt={2}
-          border="1px solid rgba(0, 0, 0, 0.12)"
+          border="1px solid" borderColor="borderColor"
           bg="#F6F5FB"
           paddingX="16px"
           placeholder="senha"
@@ -86,7 +86,7 @@ const Register = () => {
           mt={4}
           type="submit"
           onClick={handleSubmit(onSubmit)}
-          bgColor="#F2B035"
+          bgColor="color3"
           color="white"
         >
           Registrar

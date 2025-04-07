@@ -17,6 +17,7 @@ interface CustomModalProps {
   onClose: () => void;
   title: string;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  confirmText: string;
 }
 
 const CustomModal = ({
@@ -25,6 +26,7 @@ const CustomModal = ({
   onClose,
   onSubmit,
   title,
+  confirmText,
 }: CustomModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -36,7 +38,7 @@ const CustomModal = ({
 
         <ModalFooter>
           <Button colorScheme="blue" onClick={onClose} type="submit">
-            Renomear
+            {confirmText}
           </Button>
         </ModalFooter>
       </ModalContent>

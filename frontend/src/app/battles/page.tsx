@@ -3,34 +3,11 @@
 import { Box, Heading, HStack, VStack } from "@chakra-ui/react";
 import BattleCard from "@/components/BattleCard";
 import RegisterBattle from "@/components/RegisterBattle";
-import useUserStore from "@/hooks/useUserStore";
-import { useEffect, useState } from "react";
+import { useBattles } from "@/api/useBattles";
+import { Key } from "react";
 
 const Battles = () => {
-  const { token } = useUserStore();
-  const [battles, setBattles] = useState<any[]>([]);
-
-  const fetchBattles = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_HOSTNAME}/batalhas`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-      if (Array.isArray(data)) setBattles(data);
-    } catch (error) {
-      console.error("Erro ao buscar os Pokémons:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchBattles();
-  }, [token]);
+  const { data: battles } = useBattles();
 
   return (
     <HStack w="full" h="100vh" gap="0">
@@ -49,12 +26,12 @@ const Battles = () => {
           Histórico de batalhas
         </Heading>
         <VStack maxW="600px" margin="auto" paddingBottom="48px">
-          {battles.map((battle, index) => (
+          {battles?.map((battle: unknown, index: Key | null | undefined) => (
             <BattleCard battle={battle} key={index} />
           ))}
         </VStack>
       </Box>
-      <RegisterBattle reload={fetchBattles} />
+      <RegisterBattle />
     </HStack>
   );
 };

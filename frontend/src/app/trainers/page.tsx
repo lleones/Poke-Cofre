@@ -18,6 +18,11 @@ import useUserStore from "@/hooks/useUserStore";
 import { useEffect, useState } from "react";
 import CustomModal from "@/components/CustomModal/CustomModal";
 import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  useDeleteTrainer,
+  useEditTrainer,
+  useTrainers,
+} from "@/api/useTrainers";
 
 type Inputs = {
   nome: string;
@@ -25,69 +30,28 @@ type Inputs = {
 };
 
 const Trainers = () => {
-  const { token } = useUserStore();
-  const [trainers, setTrainers] = useState<any[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedTrainer, setSelectedTrainer] = useState<any>(null);
 
   const { register, handleSubmit, setValue } = useForm<Inputs>();
-
-  const fetchPokemons = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_HOSTNAME}/treinadores`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-      if (Array.isArray(data)) setTrainers(data);
-    } catch (error) {
-      console.error("Erro ao buscar os treinadores:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPokemons();
-  }, [token]);
 
   useEffect(() => {
     setValue("id", selectedTrainer?.id);
     setValue("nome", selectedTrainer?.nome);
   }, [selectedTrainer]);
 
+  const {
+    data: trainers,
+  }: { data: { nome: string; id: string }[] | undefined } = useTrainers();
+  const { mutate: editTrainer } = useEditTrainer();
+  const { mutate: deleteTrainer } = useDeleteTrainer();
+
   const onDeleteTrainer = (id: string) => {
-    fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/treinadores/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then(() => fetchPokemons())
-      .catch((error) => {
-        console.error("Erro:", error);
-      });
+    deleteTrainer(id);
   };
 
   const onEditTrainer: SubmitHandler<Inputs> = (body) => {
-    const { id, nome } = body;
-
-    fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/treinadores/${id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ nome: nome }),
-    })
-      .then((response) => response.json())
-      .then(() => fetchPokemons())
-      .catch((error) => {
-        console.error("Erro:", error);
-      });
+    editTrainer(body);
   };
 
   return (
@@ -106,6 +70,7 @@ const Trainers = () => {
         Treinadores
       </Heading>
       <CustomModal
+        confirmText="Renomear"
         isOpen={isOpen}
         onClose={onClose}
         title="Renomear Treinador"
@@ -114,7 +79,7 @@ const Trainers = () => {
         <Input {...register("nome")} />
       </CustomModal>
       <VStack maxW="600px" margin="auto" paddingBottom="48px">
-        {trainers.map(({ nome, id }, index) => (
+        {trainers?.map(({ nome, id }, index) => (
           <HStack
             key={index}
             w="full"
@@ -122,7 +87,8 @@ const Trainers = () => {
             color="black"
             padding="16px"
             borderRadius="xl"
-            border="1px solid rgba(0, 0, 0, 0.12)"
+            border="1px solid"
+            borderColor="borderColor"
             gap={4}
           >
             <Circle size="40px" bgColor="#a4a4a4" color="white" fontSize="lg">
@@ -137,7 +103,7 @@ const Trainers = () => {
             <Flex marginLeft="auto" gap={2}>
               <Button
                 colorScheme="teal"
-                backgroundColor="#F2B035"
+                backgroundColor="color4"
                 color="white"
                 size="xs"
                 onClick={() => {
@@ -149,7 +115,7 @@ const Trainers = () => {
               </Button>
               <Button
                 colorScheme="teal"
-                backgroundColor="red"
+                backgroundColor="color1"
                 color="white"
                 size="xs"
                 onClick={() => onDeleteTrainer(id)}

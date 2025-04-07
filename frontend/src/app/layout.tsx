@@ -1,15 +1,16 @@
+import { ColorModeScript } from "@chakra-ui/react"; // ✅ Importa aqui
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Provider } from "@/components/ui/provider";
 import Sidebar from "@/components/Sidebar";
+import Providers from "./providers";
 import { HStack } from "@chakra-ui/react";
+import theme from "@/theme"; // ✅ Importa o tema aqui também
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,18 +19,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className={`${montserrat.variable}`}>
-        <Provider>
+      <body>
+
+        <Providers>
           <HStack w="100vw" h="100vh" gap="0">
             <Sidebar />
             {children}
           </HStack>
-        </Provider>
+        </Providers>
       </body>
     </html>
   );

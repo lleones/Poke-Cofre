@@ -55,14 +55,14 @@ const Login = () => {
         borderRadius="md"
         margin="auto"
         maxW="500px"
-        border="1px solid rgba(0, 0, 0, 0.12)"
+        border="1px solid" borderColor="borderColor"
         align="left"
       >
         <Heading fontFamily="inherit" textTransform="uppercase" mb={1}>
           Login
         </Heading>
         <Input
-          border="1px solid rgba(0, 0, 0, 0.12)"
+          border="1px solid" borderColor="borderColor"
           bg="#F6F5FB"
           paddingX="16px"
           placeholder="username"
@@ -76,7 +76,7 @@ const Login = () => {
         <Input
           type="password"
           mt={2}
-          border="1px solid rgba(0, 0, 0, 0.12)"
+          border="1px solid" borderColor="borderColor"
           bg="#F6F5FB"
           paddingX="16px"
           placeholder="senha"
@@ -94,7 +94,7 @@ const Login = () => {
           mt={2}
           type="submit"
           onClick={handleSubmit(onSubmit)}
-          bgColor="#F2B035"
+          bgColor="color2"
           color="white"
         >
           Entrar
