@@ -16,6 +16,7 @@ const YourParties = () => {
       overflowY="auto"
     >
       <Heading
+        fontFamily="inherit"
         textTransform="uppercase"
         position="sticky"
         top="0"
@@ -23,6 +24,7 @@ const YourParties = () => {
         paddingTop="48px"
         paddingBottom="24px"
         w="full"
+        fontSize="xl"
       >
         Suas equipes
       </Heading>
