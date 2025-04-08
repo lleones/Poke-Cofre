@@ -28,11 +28,15 @@ export class PartyController {
 
   static async create(req: Request, res: Response): Promise<void> {
     try {
-      const { trainerId, pokemons } = req.body;
-      if (!trainerId || !pokemons) {
-        res.status(400).json({ error: 'É necessário informar trainerId e a lista de pokemons (mesmo que vazia)' });
+      // Usa o id do treinador vindo do token (via middleware de autenticação)
+      const trainerId = (req as any).treinadorId;
+      const { pokemons } = req.body;
+
+      if (!trainerId || pokemons === undefined) {
+        res.status(400).json({ error: 'É necessário informar os pokemons (mesmo que vazia) e usar um token válido.' });
         return;
       }
+
       const party = await PartyService.createParty(trainerId, pokemons);
       res.status(201).json(party);
     } catch (error: any) {

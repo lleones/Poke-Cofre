@@ -41,7 +41,6 @@ export class AuthController {
     }
   }
 
-  // Exemplo de login
   static async login(req: Request, res: Response) {
     try {
       const { nome, senha } = req.body;
@@ -50,27 +49,30 @@ export class AuthController {
           .status(400)
           .json({ message: 'Nome e senha são obrigatórios.' });
       }
-
-      // Busca o treinador
+  
       const treinador = await findTreinadorByNome(nome);
       if (!treinador) {
         return res
           .status(400)
           .json({ message: 'Nome ou senha inválidos.' });
       }
-
+  
       const isPasswordValid = await comparePassword(senha, treinador.senha);
       if (!isPasswordValid) {
         return res
           .status(400)
           .json({ message: 'Nome ou senha inválidos.' });
       }
-
+  
       const token = generateToken(treinador.id, treinador.nome);
-
+  
       return res.status(200).json({
         message: 'Login realizado com sucesso!',
         token,
+        treinador: {
+          id: treinador.id,
+          nome: treinador.nome,
+        },
       });
     } catch (error) {
       return res
@@ -78,4 +80,5 @@ export class AuthController {
         .json({ message: 'Erro ao fazer login', error });
     }
   }
+  
 }

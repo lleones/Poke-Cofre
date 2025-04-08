@@ -1,3 +1,4 @@
+// src/routes/parties.routes.ts
 import { Router } from 'express';
 import { PartyController } from '../controllers/party.controller';
 import { authenticate } from '../middlewares/auth.middleware';
@@ -42,14 +43,11 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
- *               trainerId:
- *                 type: string
  *               pokemons:
  *                 type: array
  *                 items:
  *                   type: string
  *             required:
- *               - trainerId
  *               - pokemons
  *     responses:
  *       201:
@@ -58,11 +56,11 @@ const router = Router();
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Party'
- *       403:
- *         description: Ação não autorizada.
+ *       400:
+ *         description: "Requisição inválida (ex.: token inválido ou falta de pokemons)."
  *
  *   get:
- *     summary: Retorna todas as parties (Apenas Bill pode acessar) com paginação
+ *     summary: Retorna todas as parties (apenas o usuário Bill pode acessar) com paginação
  *     tags: [Parties]
  *     security:
  *       - bearerAuth: []
@@ -95,7 +93,7 @@ const router = Router();
  *               items:
  *                 $ref: '#/components/schemas/Party'
  *       403:
- *         description: Acesso negado. Apenas Bill pode acessar este endpoint.
+ *         description: "Acesso negado. Apenas Bill pode acessar este endpoint."
  *
  * /parties/{id}:
  *   get:
@@ -124,7 +122,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Party'
  *       404:
- *         description: Party não encontrada
+ *         description: "Party não encontrada"
  *
  *   put:
  *     summary: Atualiza a lista de Pokémon da party (0 a 6 Pokémons)
@@ -155,6 +153,8 @@ const router = Router();
  *                 type: array
  *                 items:
  *                   type: string
+ *             required:
+ *               - pokemons
  *     responses:
  *       200:
  *         description: Party atualizada
@@ -163,9 +163,9 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Party'
  *       403:
- *         description: Ação não autorizada.
+ *         description: "Ação não autorizada."
  *       404:
- *         description: Party não encontrada
+ *         description: "Party não encontrada"
  *
  *   delete:
  *     summary: Deleta uma party específica
@@ -187,13 +187,13 @@ const router = Router();
  *           type: string
  *     responses:
  *       204:
- *         description: Party deletada
+ *         description: "Party deletada"
  *       403:
- *         description: Ação não autorizada.
+ *         description: "Ação não autorizada."
  *       404:
- *         description: Party não encontrada
+ *         description: "Party não encontrada"
  */
-router.post('/', authenticate, authorizeParty, PartyController.create);
+router.post('/', authenticate, PartyController.create);
 router.get('/', authenticateBill, PartyController.getAll);
 router.get('/:id', authenticate, authorizeParty, PartyController.getById);
 router.put('/:id', authenticate, authorizeParty, PartyController.update);

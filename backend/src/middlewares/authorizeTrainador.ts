@@ -1,4 +1,4 @@
-// src/middlewares/authorizeUser.ts
+// src/middlewares/authorizeTreinador.ts
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 
 export const authorizeTreinador: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
@@ -6,7 +6,7 @@ export const authorizeTreinador: RequestHandler = (req: Request, res: Response, 
   const tokenTreinadorNome = (req as any).treinadorNome;
   const targetTreinadorId = req.params.id;
 
-  if (tokenTreinadorNome === 'Bill') {
+  if (tokenTreinadorNome && tokenTreinadorNome.toLowerCase() === 'bill') {
     return next();
   }
 

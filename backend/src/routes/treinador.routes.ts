@@ -1,3 +1,4 @@
+// src/routes/treinadores.routes.ts
 import { Router } from 'express';
 import { TreinadorController } from '../controllers/treinador.controller';
 import { authenticate } from '../middlewares/auth.middleware';
