@@ -57,7 +57,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Party'
  *       400:
- *         description: Requisição inválida (ex.: token inválido ou falta de pokemons).
+ *         description: "Requisição inválida (ex.: token inválido ou falta de pokemons)."
  *
  *   get:
  *     summary: Retorna todas as parties (apenas o usuário Bill pode acessar) com paginação
@@ -93,7 +93,7 @@ const router = Router();
  *               items:
  *                 $ref: '#/components/schemas/Party'
  *       403:
- *         description: Acesso negado. Apenas Bill pode acessar este endpoint.
+ *         description: "Acesso negado. Apenas Bill pode acessar este endpoint."
  *
  * /parties/{id}:
  *   get:
@@ -122,7 +122,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Party'
  *       404:
- *         description: Party não encontrada
+ *         description: "Party não encontrada"
  *
  *   put:
  *     summary: Atualiza a lista de Pokémon da party (0 a 6 Pokémons)
@@ -163,9 +163,9 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Party'
  *       403:
- *         description: Ação não autorizada.
+ *         description: "Ação não autorizada."
  *       404:
- *         description: Party não encontrada
+ *         description: "Party não encontrada"
  *
  *   delete:
  *     summary: Deleta uma party específica
@@ -187,11 +187,11 @@ const router = Router();
  *           type: string
  *     responses:
  *       204:
- *         description: Party deletada
+ *         description: "Party deletada"
  *       403:
- *         description: Ação não autorizada.
+ *         description: "Ação não autorizada."
  *       404:
- *         description: Party não encontrada
+ *         description: "Party não encontrada"
  */
 router.post('/', authenticate, PartyController.create);
 router.get('/', authenticateBill, PartyController.getAll);
