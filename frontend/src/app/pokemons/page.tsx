@@ -14,24 +14,20 @@ const Pokemons = () => {
 
   const { data: pokemons } = usePokemons();
 
-  const myPokemons = pokemons?.filter(
-    (pokemon) => pokemon.trainerId === trainerId
-  );
-
-  console.log("*", myPokemons);
-
   return (
     <HStack w="full" h="100vh" gap="0">
       <Box bgColor="#F6F5FB" w="full" h="full" color="#00010D" overflowY="auto">
-        <VStack align="left" margin="auto" maxW="600px">
+        <VStack align="left" margin="auto" maxW="600px" gap={0}>
           <Heading
             textTransform="uppercase"
             fontFamily="inherit"
             paddingTop="48px"
+            paddingBottom="24px"
             fontSize="2xl"
             position="sticky"
             top="0"
             bg="#F6F5FB"
+            zIndex={2}
           >
             Pokémons
           </Heading>
@@ -62,11 +58,13 @@ const Pokemons = () => {
               }}
               marginBottom={16}
             >
-              {myPokemons?.map((pokemon, index) => (
-                <GridItem key={index}>
-                  <PokemonCard pokemon={pokemon} />
-                </GridItem>
-              ))}
+              {pokemons
+                ?.filter((pokemon) => pokemon.trainerId === trainerId)
+                .map((pokemon, index) => (
+                  <GridItem key={index}>
+                    <PokemonCard pokemon={pokemon} />
+                  </GridItem>
+                ))}
             </Grid>
           </VStack>
         </VStack>

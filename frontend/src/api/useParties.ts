@@ -99,6 +99,9 @@ const deleteParty = async (id: string, token: string) => {
     throw new Error("Erro ao deletar party");
   }
 
+
+  if (response.status === 204) return null;
+
   return await response.json();
 };
 

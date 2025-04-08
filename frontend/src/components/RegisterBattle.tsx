@@ -33,12 +33,12 @@ const RegisterBattle = () => {
 
   const winnerPokemonInfo = useMemo(() => {
     const selected = allPokemons.find((p) => p.id === selectedWinnerId);
-    return selected ? JSON.parse(selected.info) : null;
+    return selected ? selected.info : null;
   }, [selectedWinnerId, allPokemons]);
 
   const loserPokemonInfo = useMemo(() => {
     const selected = allPokemons.find((p) => p.id === selectedLoserId);
-    return selected ? JSON.parse(selected.info) : null;
+    return selected ? selected.info : null;
   }, [selectedLoserId, allPokemons]);
 
   const onSubmit: SubmitHandler<Inputs> = (body) => {
@@ -50,7 +50,7 @@ const RegisterBattle = () => {
       },
       body: JSON.stringify(body),
     })
-      .then(() => queryClient.invalidateQueries({ queryKey: ["batalhas"] }))
+      .then(() => queryClient.invalidateQueries({ queryKey: ["battles"] }))
       .catch((error) => {
         console.error("Erro:", error);
       });

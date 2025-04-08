@@ -100,8 +100,10 @@ const fetchDeletePokemon = async (id: string, token: string) => {
   );
 
   if (!response.ok) {
-    throw new Error("Erro: ao editar pokémon");
+    throw new Error("Erro: ao deletar pokémon");
   }
+
+  if (response.status === 204) return null;
 
   return await response.json();
 };

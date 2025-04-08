@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Button, Heading, Input, Text, VStack } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -16,6 +17,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<Inputs> = (body) => {
     fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/auth/register`, {
       method: "POST",
@@ -25,8 +28,8 @@ const Register = () => {
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Resposta da API:", data);
+      .then(() => {
+        router.push("/login");
       })
       .catch((error) => {
         console.error("Erro:", error);
@@ -50,14 +53,22 @@ const Register = () => {
         borderRadius="md"
         margin="auto"
         maxW="500px"
-        border="1px solid" borderColor="borderColor"
+        border="1px solid"
+        borderColor="borderColor"
         align="left"
       >
-        <Heading fontFamily="inherit" textTransform="uppercase" mb={1}>
+        <Heading
+          fontFamily="inherit"
+          textTransform="uppercase"
+          mb={1}
+          textAlign="center"
+          fontSize="xl"
+        >
           Registro de Treinador
         </Heading>
         <Input
-          border="1px solid" borderColor="borderColor"
+          border="1px solid"
+          borderColor="borderColor"
           bg="#F6F5FB"
           paddingX="16px"
           placeholder="username"
@@ -70,7 +81,8 @@ const Register = () => {
         )}
         <Input
           mt={2}
-          border="1px solid" borderColor="borderColor"
+          border="1px solid"
+          borderColor="borderColor"
           bg="#F6F5FB"
           paddingX="16px"
           placeholder="senha"

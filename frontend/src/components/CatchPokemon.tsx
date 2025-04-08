@@ -29,7 +29,7 @@ const CatchPokemon = () => {
       align="left"
       gap={4}
       position="sticky"
-      top="109"
+      top="100"
       bg="#F6F5FB"
       zIndex={2}
       paddingBottom={8}

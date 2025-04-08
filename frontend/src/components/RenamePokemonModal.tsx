@@ -41,7 +41,6 @@ const RenamePokemonModal: FC<ModalProps> = ({ pokemon, isOpen, onClose }) => {
   const { mutate } = useEditPokemon();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     mutate(data);
   };
 

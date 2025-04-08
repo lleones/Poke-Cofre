@@ -11,12 +11,11 @@ const YourParties = () => {
   const { data: parties } = useParties();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
-  const hasParties = Array.isArray(parties) && parties?.length > 0;
   const yourParty = parties?.find(
     (party: { trainerId: string }) => party.trainerId === trainerId
   );
 
-  console.log(yourParty, trainerId);
+  const hasParties = Array.isArray(parties) && parties?.length > 0 && yourParty;
 
   const { mutate } = useDeleteParty();
 
@@ -34,7 +33,7 @@ const YourParties = () => {
       gap={0}
       overflowY="auto"
     >
-      <PartyModal isOpen={isOpen} onClose={onClose} party={parties?.[0]} />
+      <PartyModal isOpen={isOpen} onClose={onClose} party={yourParty} />
       <Flex align="center" paddingTop="48px" paddingBottom="24px">
         <Heading
           fontFamily="inherit"
@@ -59,26 +58,22 @@ const YourParties = () => {
         </Button>
       </Flex>
 
-      <VStack paddingBottom="24px">
-        {parties?.map(
-          (
-            party: { pokemons: [string]; trainerId?: string },
-            index: number
-          ) => (
-            <Party
-              key={index}
-              party={{
-                ...party,
-                trainerId: party.trainerId || "default-trainer-id",
-              }}
-            />
-          )
-        )}
-      </VStack>
+      {yourParty && (
+        <VStack paddingBottom="24px">
+          <Party
+            party={{
+              ...yourParty,
+              trainerId: yourParty?.trainerId || "default-trainer-id",
+            }}
+          />
+        </VStack>
+      )}
 
-      <Button bg="color1" color="white" onClick={() => mutate(yourParty?.id)}>
-        Remover sua equipe atual
-      </Button>
+      {yourParty && (
+        <Button bg="color1" color="white" onClick={() => mutate(yourParty?.id)}>
+          Remover sua equipe atual
+        </Button>
+      )}
     </VStack>
   );
 };

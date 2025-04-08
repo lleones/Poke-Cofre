@@ -66,6 +66,7 @@ const Trainers = () => {
         position="sticky"
         top="0"
         bg="#F6F5FB"
+        zIndex={2}
       >
         Treinadores
       </Heading>

@@ -7,7 +7,12 @@ import { useBattles } from "@/api/useBattles";
 import { Key } from "react";
 
 const Battles = () => {
-  const { data: battles } = useBattles();
+  const { data: battles = [] } = useBattles();
+
+  const sortedBattles = battles?.sort(
+    (a: { timestamp: string }, b: { timestamp: string }) =>
+      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+  );
 
   return (
     <HStack w="full" h="100vh" gap="0">
@@ -26,8 +31,8 @@ const Battles = () => {
           Histórico de batalhas
         </Heading>
         <VStack maxW="600px" margin="auto" paddingBottom="48px">
-          {battles?.map((battle: unknown, index: Key | null | undefined) => (
-            <BattleCard battle={battle} key={index} />
+          {sortedBattles?.map((battle: any) => (
+            <BattleCard battle={battle} key={battle?.id} />
           ))}
         </VStack>
       </Box>

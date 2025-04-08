@@ -14,17 +14,14 @@ const fetchBattles = async (token: string) => {
 
   const battles = await response.json();
 
-  // Ordenar do mais recente para o mais antigo
-  return battles.sort(
-    (a: { timestamp: string }, b: { timestamp: string }) =>
-      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  );
+  return battles;
 };
 
 export const useBattles = () => {
   const { token } = useUserStore();
+
   return useQuery({
-    queryKey: ["batalhas"],
+    queryKey: ["battles"],
     queryFn: () => fetchBattles(token),
     enabled: !!token,
     staleTime: 1000 * 60 * 5,
@@ -46,6 +43,8 @@ const deleteBattle = async (id: string, token: string) => {
     throw new Error("Erro ao deletar batalha");
   }
 
+  if (response.status === 204) return null;
+
   return await response.json();
 };
 
@@ -57,6 +56,9 @@ export const useDeleteBattle = () => {
     mutationFn: (id: string) => deleteBattle(id, token),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["battles"] });
+    },
+    onError: (err) => {
+      console.error("❌ Erro ao deletar batalha:", err);
     },
   });
 };

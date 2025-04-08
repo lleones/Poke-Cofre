@@ -1,4 +1,5 @@
 import useUserStore from "@/hooks/useUserStore";
+import { useToast } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -54,10 +55,14 @@ const deleteTrainer = async (id: string, token: string) => {
     throw new Error("Erro ao deletar treinador");
   }
 
+
+  if (response.status === 204) return null;
+
   return await response.json();
 };
 
 export const useEditTrainer = () => {
+  const toast = useToast();
   const { token, trainer, setTrainer } = useUserStore();
   const queryClient = useQueryClient();
 
@@ -65,6 +70,14 @@ export const useEditTrainer = () => {
     mutationFn: ({ id, nome }: { id: string; nome: string }) =>
       editTrainer(id, nome, token),
     onSuccess: (data) => {
+      toast({
+        title: "Cadastro atualizado.",
+        description: "O nome do usuário foi atualizado.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
       if (trainer.id === data.id) setTrainer(data);
       queryClient.invalidateQueries({ queryKey: ["trainers"] }); // se tiver lista de treinadores
       queryClient.invalidateQueries({ queryKey: ["pokemons"] }); // se quiser refazer esse fetch
